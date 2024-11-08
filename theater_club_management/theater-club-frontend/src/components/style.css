@@ -1,0 +1,42 @@
+.container {
+    text-align: center;
+    /* color: aliceblue; */
+    margin: 40px 0;
+}
+
+.title {
+    color: #495057;
+}
+
+.button {
+    color: rgb(221, 130, 130);
+    background-color: #18191b;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+
+.button_big {
+    color: rgb(221, 130, 130);
+    size: "fill";
+    align-self:auto ;
+    width: 20;
+    height: 20;
+    background-color: #18191b;
+    padding: 200px 600px;
+    text-decoration: none;
+    text-size-adjust: 50;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.heading_cont {
+    text-align: center;
+    background-image: url('../images/stage_image.jpeg');
+    padding: 50px;
+    background: scroll;
+}

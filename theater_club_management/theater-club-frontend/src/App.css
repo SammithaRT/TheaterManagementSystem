@@ -1,0 +1,57 @@
+.App {
+  text-align: center;
+  /* background-color: rgb(126, 17, 17); */
+  background-size:cover;
+
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  /* background-color: #282c34; */
+  /* min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  /* justify-content: center; */
+  /* font-size: calc(10px + 2vmin); */
+  font-size:xx-large;
+  background-size: cover; /* Resize the image to cover the entire container */
+  /* text-align: center;*/
+  /*background-image: url('/home/sammitha/PES/DBMS/DBMS_Project/theater_club_management/theater-club-frontend/src/images/stage_image.jpeg'); */ 
+  /*padding: 50px;*/
+  /* background:scroll;  */
+  background-size: contain; /* Compress the image to fit within the container */ 
+  background-repeat: no-repeat;
+  color: rgb(79, 8, 12);
+  text-align: center; 
+  /* background-image: url('./images/stage_image.jpeg');  */
+  background-size: cover; /* Ensure the image covers the container */ 
+  /*height: 100%;*/ /* Set the height of the container */ 
+  /*width: 100%; /* Set the width of the container */ 
+  padding: 100px; 
+  overflow: hidden;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
