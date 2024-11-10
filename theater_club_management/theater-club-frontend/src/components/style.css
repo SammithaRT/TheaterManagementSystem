@@ -5,12 +5,12 @@
 }
 
 .title {
-    color: #495057;
+    color: #526551;
 }
 
 .button {
-    color: rgb(221, 130, 130);
-    background-color: #18191b;
+    color: rgb(55, 196, 55);
+    background-color: #202620;
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 4px;
@@ -20,12 +20,12 @@
 
 
 .button_big {
-    color: rgb(221, 130, 130);
+    color: rgb(55, 196, 55);
     size: "fill";
     align-self:auto ;
     width: 20;
     height: 20;
-    background-color: #18191b;
+    background-color: #202620;
     padding: 200px 600px;
     text-decoration: none;
     text-size-adjust: 50;
@@ -40,3 +40,46 @@
     padding: 50px;
     background: scroll;
 }
+
+.editTable {
+    width: 80%; 
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.editTable th, .editTable td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.editTable th {
+    background-color: #e2f4df;
+}
+
+/* Input field styling */
+.editTable input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #284e32;
+    border-radius: 4px;
+}
+
+/* Basic form styling */
+/* Styling the form container */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  /* Styling form labels */
+  
