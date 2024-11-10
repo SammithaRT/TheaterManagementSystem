@@ -19,20 +19,20 @@ const Home = () => {
     }, []);
 
     return (
-        <div className={styles.container}>
-            <h2 className={styles.title}>Welcome to the Theater Club Management System</h2>
+        <div className='container'>
+            <h2 className='title'>Welcome to the Theater Club Management System</h2>
             {user && <p>Hello, {user.admin_name}</p>}
             <p>Manage all your theater club activities efficiently.</p>
-            {!user && <Link to="/login" className='button'>Go to Login</Link>}
-            {user && <Link to="/account" className="button">Go to my account</Link>}
-            <h1>Events</h1>
+            {!user && <Link to="/login" className='go_to_account'>Go to Login</Link>}
+            {user && <Link to="/account" className="go_to_account">My Account</Link>}
+            <h1 className='title'>EVENTS</h1>
             <ul>
                 {events.map(item => (
-                    <p className="container" key={item.event_id}>
-                        <Link to={`/${item.event_id}/plays`} className = 'button'>
+                    <p1 className="container" key={item.event_id}>
+                        <Link to={`/${item.event_id}/plays`} className = 'button_big'>
                             {item.event_name}
                         </Link> 
-                    </p>
+                    </p1>
                 ))}
             </ul>
         </div>

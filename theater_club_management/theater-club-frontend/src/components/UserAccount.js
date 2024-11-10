@@ -29,16 +29,16 @@ const UserAccount = () => {
     }
 
     return (
-        <div className="container my-4">
-            <h2>Welcome, {user.admin_name}</h2>
-            <p>Account details here...</p>
+        <div className="container">
+            <h2 className='title'>Welcome, {user.admin_name}</h2>
+            {/* <p>Account details here...</p> */}
             <table align='center'>
                 <tr> <Link to = "/members" className="button_big"> MEMBERS </Link> </tr>
                <tr> <Link to = "/writers" className="button_big"> WRITERS </Link> </tr>
                <tr> <Link to = "/actor" className="button_big"> ACTORS </Link> </tr>
                <tr> <Link to = "/producers" className="button_big"> PRODUCERS </Link> </tr>
             </table>
-            <p><Link to="/" type = "button" className="button"> Go to Home Page </Link></p>
+            <p><Link to="/" type = "button" className="go_to_account"> Home </Link></p>
 
         </div>
     );

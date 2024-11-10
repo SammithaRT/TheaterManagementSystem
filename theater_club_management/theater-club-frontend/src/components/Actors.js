@@ -90,7 +90,7 @@ const Actors = () => {
   }
 
   return (
-    <div className="container my-4">
+    <div className="container">
       <h1 className='title'>ACTORS</h1>
       <form onSubmit={handleNewActorSubmit} className="">
         <input type="text" name="actor_id" placeholder="Actor ID" value={newActor.actor_id} onChange={handleNewActorChange} required />
@@ -137,7 +137,7 @@ const Actors = () => {
           ))}
         </tbody>
       </table>
-      <Link to="/account" state={{ user }} className="button">Back</Link>
+      <Link to="/account" state={{ user }} className="button_back">Back</Link>
     </div>
   );
 };

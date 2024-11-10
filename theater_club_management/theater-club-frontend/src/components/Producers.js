@@ -81,7 +81,7 @@ const Producers = () => {
 
   if (!user) {
     return (
-      <div className="container my-4">
+      <div className="container">
         <h2>Access Denied</h2>
         <p>Please <Link to="/login">log in</Link> to view this page.</p>
       </div>
@@ -89,7 +89,7 @@ const Producers = () => {
   }
 
   return (
-    <div className="container my-4">
+    <div className="container">
       <h1 className='title'>PRODUCERS</h1>
       <form onSubmit={handleNewProducerSubmit} className="">
         <input type="text" name="prod_id" placeholder="Producer ID" value={newProducer.prod_id} onChange={handleNewProducerChange} required />
@@ -135,7 +135,7 @@ const Producers = () => {
           ))}
         </tbody>
       </table>
-      <Link to="/account" state={{ user }} className="button">Back</Link>
+      <Link to="/account" state={{ user }} className="button_back">Back</Link>
     </div>
   );
 };

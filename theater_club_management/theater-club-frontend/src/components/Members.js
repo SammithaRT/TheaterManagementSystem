@@ -82,7 +82,7 @@ const Members = () => {
 
   if (!user) {
     return (
-      <div className="container my-4">
+      <div className="container">
         <h2>Access Denied</h2>
         <p>Please <Link to="/login">log in</Link> to view this page.</p>
       </div>
@@ -90,7 +90,8 @@ const Members = () => {
   }
 
   return (
-    <div className="container my-4">
+    <div className="container">
+      <Link to="/account" state={{ user }} className="button_back">Back</Link>
       <h1 className='title'>MEMBERS</h1>
       <form onSubmit={handleNewMemberSubmit} className="addMemberForm">
         <input type="text" name="mem_id" placeholder="Member ID" value={newMember.mem_id} onChange={handleNewMemberChange} required />
@@ -152,7 +153,6 @@ const Members = () => {
           ))}
         </tbody>
       </table>
-      <Link to="/account" state={{ user }} className="button">Back</Link>
     </div>
   );
 };

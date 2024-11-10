@@ -88,7 +88,7 @@ const Writer = () => {
     }
 
     return (
-      <div className="container my-4">
+      <div className="container">
         <h1 className='title'>WRITERS</h1>
         <form onSubmit={handleNewWriterSubmit} className="">
           <input type="text" name="writer_id" placeholder="Writer ID" value={newWriter.writer_id} onChange={handleNewWriterChange} required />
@@ -134,7 +134,7 @@ const Writer = () => {
             ))}
           </tbody>
         </table>
-        <Link to="/account" state={{ user }} className="button">Back</Link>
+        <Link to="/account" state={{ user }} className="button_back">Back</Link>
       </div>
     );
 };

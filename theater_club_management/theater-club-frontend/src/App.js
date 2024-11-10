@@ -17,7 +17,7 @@ import './App.css';
 function App() {
     return (
         <Router>
-            <div className="App">
+            <div className="body">
                 {/* <header className="App-header">
                     <h1>DRAMA-TRICKS</h1>
                 </header> */}

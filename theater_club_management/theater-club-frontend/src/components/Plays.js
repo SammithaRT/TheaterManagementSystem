@@ -53,7 +53,7 @@ const Plays = () => {
           <ul>
            {plays.map((play) => (
                  <p key={play.play_id}>
-                   <Link to={`/${play.event_id}/${play.play_id}/play_members`}>
+                   <Link to={`/${play.event_id}/${play.play_id}/play_members`} className='button_big'>
                             {play.play_name}
                         </Link>                   
                 </p>
