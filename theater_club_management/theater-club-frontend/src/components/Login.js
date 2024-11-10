@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -31,19 +32,20 @@ const Login = () => {
 
     return (
         <div className="container my-4">
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
+            <h2 className='title'>Login</h2>
+            <form onSubmit={handleSubmit} className='form'>
                 <div className="form-group">
-                    <label>Username:</label>
+                    <label>Username:  </label>
                     <input 
                         type="text" 
                         className="form-control"
                         value={username} 
                         onChange={(e) => setUsername(e.target.value)} 
                     />
+                    <p></p>
                 </div>
                 <div className="form-group">
-                    <label>Password:</label>
+                    <label>Password:  </label>
                     <input 
                         type="password" 
                         className="form-control"
@@ -51,9 +53,11 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)} 
                     />
                 </div>
-                <button type="submit" className="btn btn-primary mt-3">Login</button>
+                <p></p>
+                <button type="submit" className="button">Login</button>
             </form>
             {message && <p className="mt-3">{message}</p>}
+            <Link to = "/" className="button_back" > Back </Link>
         </div>
     );
 };

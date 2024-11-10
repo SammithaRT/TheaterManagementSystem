@@ -48,6 +48,7 @@ const Plays = () => {
 
   return (
     <div>
+      <h1 className='title'>PLAYS</h1>
       {eventId ? (
         plays.length > 0 ? (
           <ul>
@@ -65,7 +66,7 @@ const Plays = () => {
       ) : (
         <p>Event ID is not available.</p>
       )}
-    <Link to = "/" state={{user}} className="button" > Back </Link>
+    <Link to = "/" state={{user}} className="button_back" > Back </Link>
 
     </div>
   );

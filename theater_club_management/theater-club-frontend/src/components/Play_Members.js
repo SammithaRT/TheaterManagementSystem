@@ -63,7 +63,7 @@ const Play_Members = () => {
       ) : (
         <p>Play ID is not available.</p>
       )}
-    <Link to = "/" state={{user}} className="button" > Back </Link>
+    <Link to = "/" state={{user}} className="button_back" > Home </Link>
 
     </div>
   );
