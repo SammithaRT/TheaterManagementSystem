@@ -3,6 +3,8 @@
     /* color: aliceblue; */
     margin: 40px 0;
     position: relative;
+    /* background-image: url('/home/sammitha/PES/DBMS/DBMS_Project/TheaterClubManagementSystem/theater_club_management/theater-club-frontend/src/images/bg4.png'); */
+
 }
 
 .title {
@@ -16,15 +18,35 @@
     margin: 0;
 }
 
+.home_container {
+   /* display:-ms-flexbox;  */
+   justify-content: center; 
+   align-items: center;
+    /* height: 500vh; */
+}
+
+.home_title {
+    color: #070707;
+    /* background-color: rgba(248, 245, 245, 0.7);  */
+    padding: 10px; /* Adjust padding as needed */
+    width: 100%; /* Make the background span full width */
+    display: block; /* Ensure it is displayed as a block element */
+    text-align: center; /* Center the text */
+    text-shadow: #284e32;
+    font-size: 6em;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 20%;
+}
+
 
 .button {
-    color: rgb(55, 196, 55);
-    background-color: #202620;
+    color: rgba(25, 95, 25, 0.837);
+    background-color:  rgba(248, 245, 245, 0.7);
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 4px;
     display: inline-block;
-    /* margin-top: 20px; */
+    margin-top: 20px;
     top: 0; 
     right: 0; 
     margin: 10px; /* Optional: adjust margin as needed */ 
@@ -32,13 +54,14 @@
 }
 .button:hover {
     transform: scale(1.05); /* Slightly enlarge on hover */
-    background-color: #101610;
+    background-color: rgba(25, 95, 25, 0.837);
+    color:#fafafa
 }
 
 
 .button_back {
-    color: rgb(55, 196, 55); 
-    background-color: #202620; 
+    color: rgba(25, 95, 25, 0.837);
+    background-color:  rgba(248, 245, 245, 0.7);
     padding: 10px 20px; 
     text-decoration: none; 
     border-radius: 4px; 
@@ -48,7 +71,8 @@
 }
 .button_back:hover {
     transform: scale(1.05); /* Slightly enlarge on hover */
-    background-color: #101610;
+    background-color: rgba(25, 95, 25, 0.837);
+    color:#fafafa
 }
 
 /* .button_big {
@@ -70,11 +94,11 @@
 .button_big {
     display: flex;
     align-items: center;
-    background-color: #202620;
-    width: 100;
+    background-color: rgba(25, 95, 25, 0.837);
+    color:#fafafa;
+    width: 50;
     height: 50;
-    color: rgb(55, 196, 55);
-    padding: 200px 600px;
+    padding: 30px 50px;
     margin: 20px 0;
     border-radius: 8px;
     text-decoration: none; /* Remove underline from links */
@@ -84,14 +108,15 @@
 
 .button_big:hover {
     transform: scale(1.05); /* Slightly enlarge on hover */
-    background-color: #101610;
+    color: rgba(25, 95, 25, 0.837);
+    background-color:  rgba(248, 245, 245, 0.7);
 }
 
 
 
 .go_to_account{
-    color: rgb(55, 196, 55); 
-    background-color: #202620; 
+    color: rgba(25, 95, 25, 0.837);
+    background-color:  rgba(248, 245, 245, 0.7);
     padding: 10px 20px; 
     text-decoration: none; 
     border-radius: 4px; 
@@ -101,7 +126,8 @@
 }
 .go_to_account:hover {
     transform: scale(1.05); /* Slightly enlarge on hover */
-    background-color: #101610;
+    background-color: rgba(25, 95, 25, 0.837);
+    color:#fafafa
 }
 
 .heading_cont {
@@ -119,7 +145,7 @@
 }
 
 .editTable th, .editTable td {
-    border: 1px solid #ddd;
+    border: 1px solid #3f3c3c;
     padding: 10px;
     text-align: left;
 }
@@ -133,7 +159,7 @@
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
-    border: 1px solid #284e32;
+    border: 1px solid #0b140e;
     border-radius: 4px;
 }
 

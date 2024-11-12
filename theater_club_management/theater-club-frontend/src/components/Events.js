@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
 
-const Home = () => {
+const Events = () => {
     const [events, setEvents] = useState([]);
     const { user } = useContext(UserContext);
 
@@ -19,15 +19,21 @@ const Home = () => {
     }, []);
 
     return (
-        <div className='home_container'>
-            <h1 className='home_title'>THEATER CLUB</h1>
-            {user && <p>Hello, {user.admin_name} !</p>}
-            {/* <p>Manage all your theater club activities efficiently.</p> */}
-            {!user && <Link to="/login" className='button'>Login</Link>}
-             <Link to="/events" className='button'>Events</Link>
-            {user && <Link to="/account" className="button">My Account</Link>}
+        <div className='container'>
+            <h1 className='title'>EVENTS</h1>
+            <ul>
+                {events.map(item => (
+                    <p1 className="container" key={item.event_id}>
+                        <Link to={`/${item.event_id}/plays`} className = 'button_big'>
+                            {item.event_name}
+                        </Link> 
+                    </p1>
+                ))}
+            </ul>
+            <Link to = "/" state={{user}} className="button_back" > Back </Link>
         </div>
     );
 };
 
-export default Home;
+export default Events;
+

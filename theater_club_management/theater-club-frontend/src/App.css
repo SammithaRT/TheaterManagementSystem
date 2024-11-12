@@ -6,11 +6,12 @@
 
 }
 body {
-  /* background-image: url('/home/sammitha/PES/DBMS/DBMS_Project/TheaterClubManagementSystem/theater_club_management/theater-club-frontend/src/images/bg2.png'); */
+  /* background-image: url('/home/sammitha/PES/DBMS/DBMS_Project/TheaterClubManagementSystem/theater_club_management/theater-club-frontend/src/images/bg4.png'); */
+  background: linear-gradient(135deg, #c8e4c8, #a9d6a9);
   background-size: cover; /* Ensures the image covers the entire page */
   background-position: center; /* Centers the image */
   background-repeat: no-repeat; /* Prevents repeating the image */
-  background-attachment: fixed; /* Fixes the image in place when scrolling */
+  background-attachment:fixed; /* Fixes the image in place when scrolling */
   margin: 0;
   padding: 0;
   height: 100vh; /* Ensures the background covers the viewport height */

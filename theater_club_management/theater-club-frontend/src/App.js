@@ -10,6 +10,7 @@ import Producers from './components/Producers';
 import HomeAccount from './components/HomeAccount';
 import Play_Members from './components/Play_Members';
 import Plays from './components/Plays';
+import Events from './components/Events';
 
 
 import './App.css';
@@ -25,6 +26,7 @@ function App() {
                     <Routes>
                         <Route exact path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
+                        <Route path="/events" element={<Events />} />
                         <Route path="/members" element={<Members />} />
                         <Route path="/writers" element={<Writers />} />
                         <Route path="/account" element={<UserAccount />} />
