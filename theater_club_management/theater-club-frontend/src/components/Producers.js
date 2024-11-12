@@ -100,6 +100,7 @@ const Producers = () => {
         <thead>
           <tr>
             <th>Producer ID</th>
+            <th>Profile Picture</th>
             <th>Name</th>
             <th>Domain</th>
             <th>Actions</th>
@@ -110,6 +111,9 @@ const Producers = () => {
             <tr key={producer.prod_id}>
               <td>
                 {producer.prod_id}
+              </td>
+              <td>
+              <img src={`/${producer.profile_picture}`} alt={producer.mem_name} className="profile-picture" />
               </td>
               <td>
                 {producer.mem_name}
@@ -126,8 +130,8 @@ const Producers = () => {
                   <button onClick={() => handleSave(producer.prod_id)}>Save</button>
                 ) : (
                   <>
-                    <button onClick={() => handleEdit(producer)}>Edit</button>
-                    <button onClick={() => deleteProducer(producer.prod_id)}>Delete</button>
+                    <button onClick={() => handleEdit(producer)} className='button'>Edit</button>
+                    <button onClick={() => deleteProducer(producer.prod_id)} className='button'>Delete</button>
                   </>
                 )}
               </td>

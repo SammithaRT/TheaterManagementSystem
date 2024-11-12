@@ -106,6 +106,7 @@ const Members = () => {
         <thead>
           <tr>
             <th>Member ID</th>
+            <th>Profile Picture</th>
             <th>Member Name</th>
             <th>Department</th>
             <th>Semester</th>
@@ -117,6 +118,9 @@ const Members = () => {
             <tr key={member.mem_id}>
               <td>
                 {member.mem_id}
+              </td>
+              <td>
+              <img src={`/${member.profile_picture}`} alt={member.mem_name} className="profile-picture" />
               </td>
               <td>
                 {editMember && editMember.mem_id === member.mem_id ? (
@@ -144,8 +148,8 @@ const Members = () => {
                   <button onClick={() => handleSave(member.mem_id)}>Save</button>
                 ) : (
                   <>
-                    <button onClick={() => handleEdit(member)}>Edit</button>
-                    <button onClick={() => deleteMember(member.mem_id)}>Delete</button>
+                    <button onClick={() => handleEdit(member)} className='button'>Edit</button>
+                    <button onClick={() => deleteMember(member.mem_id)} className='button'>Delete</button>
                   </>
                 )}
               </td>

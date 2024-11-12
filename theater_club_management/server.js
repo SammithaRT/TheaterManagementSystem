@@ -91,33 +91,34 @@ app.get('/api/:eventId/:playId/play_members', (req, res) => {
     const playId = req.params.playId;
     const eventId = req.params.eventId;
     const query = `
-      SELECT 
-        p.play_name, 
-        m.mem_name,
-        p.play_id,
-        CASE
-          WHEN w.writer_id IS NOT NULL THEN 'Writer'
-          WHEN a.actor_id IS NOT NULL THEN 'Actor'
-          WHEN pr.prod_id IS NOT NULL THEN 'Producer'
-          ELSE 'Unknown'
-        END AS role
-      FROM 
+       SELECT 
+    p.play_name, 
+    m.mem_name,
+    p.play_id,
+    MAX(m.profile_picture) as profile_picture, -- Use MAX or any other aggregate function
+    CASE
+        WHEN w.writer_id IS NOT NULL THEN 'Writer'
+        WHEN a.actor_id IS NOT NULL THEN 'Actor'
+        WHEN pr.prod_id IS NOT NULL THEN 'Producer'
+        ELSE 'Unknown'
+    END AS role
+    FROM 
         play_members pm
-      JOIN 
+    JOIN 
         play p ON pm.play_id = p.play_id
-      JOIN 
+    JOIN 
         members m ON m.mem_id = pm.mem_id
-      LEFT JOIN 
+    LEFT JOIN 
         writer w ON m.mem_id = w.writer_id
-      LEFT JOIN 
+    LEFT JOIN 
         actor a ON m.mem_id = a.actor_id
-      LEFT JOIN 
+    LEFT JOIN 
         producer pr ON m.mem_id = pr.prod_id
-      WHERE 
+    WHERE 
         p.play_id = ?
-      GROUP BY 
-        p.play_name, m.mem_name, w.writer_id, a.actor_id, pr.prod_id
-      ORDER BY 
+    GROUP BY 
+        p.play_name, m.mem_name, p.play_id, w.writer_id, a.actor_id, pr.prod_id
+    ORDER BY 
         role;
     `;
   

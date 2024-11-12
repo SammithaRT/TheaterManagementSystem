@@ -99,6 +99,7 @@ const Writer = () => {
           <thead>
             <tr>
               <th>Writer ID</th>
+              <th>Profile Picture</th>
               <th>Name</th>
               <th>Expertise</th>
               <th>Actions</th>
@@ -109,6 +110,9 @@ const Writer = () => {
               <tr key={item.writer_id}>
                 <td>
                    { item.writer_id}
+                </td>
+                <td>
+                <img src={`/${item.profile_picture}`} alt={item.mem_name} className="profile-picture" />
                 </td>
                 <td>
                   {item.mem_name}
@@ -125,8 +129,8 @@ const Writer = () => {
                     <button onClick={() => handleSave(item.writer_id)}>Save</button>
                   ) : (
                     <>
-                      <button onClick={() => handleEdit(item)}>Edit</button>
-                      <button onClick={() => deleteWriter(item.writer_id)}>Delete</button>
+                      <button onClick={() => handleEdit(item)} className='button'>Edit</button>
+                      <button onClick={() => deleteWriter(item.writer_id)} className='button'>Delete</button>
                     </>
                   )}
                 </td>

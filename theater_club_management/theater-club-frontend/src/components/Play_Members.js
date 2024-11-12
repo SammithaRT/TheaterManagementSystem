@@ -48,23 +48,26 @@ const Play_Members = () => {
   
 
   return (
-    <div>
+    <div className="play-members">
       {playId ? (
         plays.length > 0 ? (
-          <ul>
+          <ul className='styled-list'>
            {plays.map((play) => (
-  <p key={play.play_id}>{play.mem_name} - {play.role}</p>
-  ))}
-
-            </ul>
+              <div className="play-member" key={play.play_id}>
+                {/* <img src={`../${play.profile_picture}`} alt={play.mem_name} className="profile-picture" />                 */}
+                <img src={`/${play.profile_picture}`} alt={play.mem_name} className="profile-picture" />
+                <p className='mem-name'>{play.mem_name}</p>
+                <p className='role'>{play.role}</p>
+              </div>
+            ))}
+          </ul>
         ) : (
           <p>No members found for this play.</p>
         )
       ) : (
         <p>Play ID is not available.</p>
       )}
-    <Link to = "/" state={{user}} className="button_back" > Home </Link>
-
+      <Link to="/" state={{user}} className="button_back">Home</Link>
     </div>
   );
 };

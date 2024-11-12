@@ -102,6 +102,7 @@ const Actors = () => {
         <thead>
           <tr>
             <th>Actor ID</th>
+            <th>Profile Picture</th>
             <th>Name</th>
             <th>Expertise</th>
             <th>Actions</th>
@@ -112,6 +113,9 @@ const Actors = () => {
             <tr key={actor.actor_id}>
               <td>
                  { actor.actor_id}
+              </td>
+              <td>
+              <img src={`/${actor.profile_picture}`} alt={actor.mem_name} className="profile-picture" />
               </td>
               <td>
                 {actor.mem_name}
@@ -128,8 +132,8 @@ const Actors = () => {
                   <button onClick={() => handleSave(actor.actor_id)}>Save</button>
                 ) : (
                   <>
-                    <button onClick={() => handleEdit(actor)}>Edit</button>
-                    <button onClick={() => deleteActor(actor.actor_id)}>Delete</button>
+                    <button onClick={() => handleEdit(actor)} className='button'>Edit</button>
+                    <button onClick={() => deleteActor(actor.actor_id)} className='button'>Delete</button>
                   </>
                 )}
               </td>

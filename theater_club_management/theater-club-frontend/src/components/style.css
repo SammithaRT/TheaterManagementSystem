@@ -122,7 +122,7 @@
     border-radius: 4px; 
     position: absolute; /*Ensure absolute positioning  */
     top: 5px; /* Adjust the distance from the top */ 
-    right: 50px;
+    right: 50px;    
 }
 .go_to_account:hover {
     transform: scale(1.05); /* Slightly enlarge on hover */
@@ -151,7 +151,11 @@
 }
 
 .editTable th {
-    background-color: #e2f4df;
+    background-color: rgba(25, 95, 25, 0.837);
+    color:#fafafa
+}
+.editTable td {
+    background-color: rgba(240, 246, 240, 0.7);
 }
 
 /* Input field styling */
@@ -168,15 +172,60 @@
 .form {
     align-items: center;
     background-color: #d6dfcc;
-    padding: 30px;
-    border-radius: 20px;
+    padding: 30px 30px;
+    border-radius: 30px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 500px;
     margin: auto;
+    margin-top: 10%;
+
   }
 
-  
+  .play-members {
+    padding: 20px;
+}
 
-  
-  /* Styling form labels */
-  
+.styled-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.play-member {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.play-member:hover {
+    transform: scale(1.05);
+}
+
+.mem-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+.role {
+    font-style: italic;
+    color: #6b8e23;
+}
+
+.profile-picture {
+    width: 150px; /* Adjust the width as needed */
+    height: 150px; /* Adjust the height as needed */
+    object-fit: cover; /* Ensures the image covers the specified dimensions without stretching */
+    border-radius:50%; /* Optional: Makes the images circular */
+    border: 2px solid #ccc; /* Optional: Adds a border around the images */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow effect */
+    margin-bottom: 10px; /* Optional: Adds space below the images */
+}
