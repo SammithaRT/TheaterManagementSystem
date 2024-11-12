@@ -68,6 +68,7 @@
     position: absolute; /*Ensure absolute positioning  */
     top: 5px; /* Adjust the distance from the top */ 
     left: 30px;
+    border: 0cap;
 }
 .button_back:hover {
     transform: scale(1.05); /* Slightly enlarge on hover */

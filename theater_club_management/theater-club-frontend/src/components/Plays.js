@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
-import  { useContext } from 'react';
+import { useContext } from 'react';
 
 const Plays = () => {
   const { eventId } = useParams();
   const [plays, setPlays] = useState([]);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPlays = async () => {
@@ -45,6 +45,9 @@ const Plays = () => {
     fetchPlays();
   }, [eventId]);
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   return (
     <div>
@@ -52,22 +55,21 @@ const Plays = () => {
       {eventId ? (
         plays.length > 0 ? (
           <ul>
-           {plays.map((play) => (
-                 <p key={play.play_id}>
-                   <Link to={`/${play.event_id}/${play.play_id}/play_members`} className='button_big'>
-                            {play.play_name}
-                        </Link>                   
-                </p>
+            {plays.map((play) => (
+              <p key={play.play_id}>
+                <Link to={`/${play.event_id}/${play.play_id}/play_members`} className='button_big'>
+                  {play.play_name}
+                </Link>                   
+              </p>
             ))}
-            </ul>
+          </ul>
         ) : (
           <p>No plays found for this event.</p>
         )
       ) : (
         <p>Event ID is not available.</p>
       )}
-    <Link to = "/" state={{user}} className="button_back" > Back </Link>
-
+      <button onClick={handleGoBack} className="button_back">Back</button>
     </div>
   );
 };

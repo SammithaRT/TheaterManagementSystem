@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import  { useContext } from 'react';
 
@@ -9,6 +8,8 @@ const Play_Members = () => {
   const { eventId } = useParams();
   const [plays, setPlays] = useState([]);
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchPlayMem = async () => {
@@ -46,6 +47,9 @@ const Play_Members = () => {
     fetchPlayMem();
   }, [playId, eventId]); // Combine the dependencies
   
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   return (
     <div className="play-members">
@@ -67,7 +71,7 @@ const Play_Members = () => {
       ) : (
         <p>Play ID is not available.</p>
       )}
-      <Link to="/" state={{user}} className="button_back">Home</Link>
+      <button onClick={handleGoBack} className="button_back">Back</button>
     </div>
   );
 };
