@@ -7,6 +7,8 @@ const Play_Members = () => {
   const { playId } = useParams();
   const { eventId } = useParams();
   const [plays, setPlays] = useState([]);
+  const [editPM, setEditPM] = useState(null);
+  const [newPM, setNewPM] = useState({ play_id: '', play_name: '', director_id: '', types: ''});
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -50,6 +52,7 @@ const Play_Members = () => {
   const handleGoBack = () => {
     navigate(-1);
   };
+
 
   return (
     <div className="play-members">

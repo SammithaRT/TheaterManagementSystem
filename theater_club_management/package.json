@@ -10,10 +10,13 @@
   "author": "Sammitha T",
   "license": "ISC",
   "dependencies": {
+    "chromedriver": "^131.0.0",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "firebase": "^11.0.1",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.11.4",
-    "react-router-dom": "^6.27.0"
+    "react-router-dom": "^6.27.0",
+    "selenium-webdriver": "^4.26.0"
   }
 }

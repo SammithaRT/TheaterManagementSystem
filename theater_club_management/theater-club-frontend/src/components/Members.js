@@ -7,7 +7,7 @@ import './style.css'; // Import your CSS file here
 const Members = () => {
   const [members, setMembers] = useState([]);
   const [editMember, setEditMember] = useState(null);
-  const [newMember, setNewMember] = useState({ mem_id: '', mem_name: '', dept: '', sem: '', dob: '', date_of_entry: '' });
+  const [newMember, setNewMember] = useState({ mem_id: '', mem_name: '', dept: '', sem: '', dob: '', date_of_entry: '', profile_picture: null });
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -25,19 +25,37 @@ const Members = () => {
 
   const updateMember = async (id, updatedMember) => {
     try {
-      const response = await axios.put(`http://localhost:3001/api/members/${id}`, updatedMember);
+      const formData = new FormData();
+      formData.append('mem_name', updatedMember.mem_name);
+      formData.append('dept', updatedMember.dept);
+      formData.append('sem', updatedMember.sem);
+      formData.append('dob', updatedMember.dob);
+      formData.append('date_of_entry', updatedMember.date_of_entry);
+      if (updatedMember.profile_picture) {
+        formData.append('profile_picture', updatedMember.profile_picture);
+      }
+
+      const response = await axios.put(`http://localhost:3001/api/members/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       console.log('Member updated:', response.data);
     } catch (error) {
       console.error('Error updating member:', error);
     }
   };
 
-  const addMember = async (newMember) => {
+  const addMember = async (formData) => {
     try {
-      const response = await axios.post('http://localhost:3001/api/members', newMember);
+      const response = await axios.post('http://localhost:3001/api/members', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       console.log('Member added:', response.data);
       alert('Member added successfully');
-      setNewMember({ mem_id: '', mem_name: '', dept: '', sem: '', dob: '', date_of_entry: '' });
+      setNewMember({ mem_id: '', mem_name: '', dept: '', sem: '', dob: '', date_of_entry: '', profile_picture: null });
       const updatedMembers = await axios.get('http://localhost:3001/api/members');
       setMembers(updatedMembers.data);
     } catch (error) {
@@ -57,7 +75,6 @@ const Members = () => {
       alert(`An error occurred while deleting the member: ${error.response ? error.response.data.message : error.message}`);
     }
   };
-  
 
   const handleEdit = (member) => {
     setEditMember({ ...member });
@@ -72,13 +89,29 @@ const Members = () => {
   };
 
   const handleNewMemberChange = (e) => {
-    setNewMember({ ...newMember, [e.target.name]: e.target.value });
+    const { name, value, files } = e.target;
+    if (name === 'profile_picture') {
+      setNewMember({ ...newMember, profile_picture: files[0] });
+    } else {
+      setNewMember({ ...newMember, [name]: value });
+    }
   };
-
+  
   const handleNewMemberSubmit = (e) => {
     e.preventDefault();
-    addMember(newMember);
+    const formData = new FormData();
+    formData.append('mem_id', newMember.mem_id);
+    formData.append('mem_name', newMember.mem_name);
+    formData.append('dept', newMember.dept);
+    formData.append('sem', newMember.sem);
+    formData.append('dob', newMember.dob);
+    formData.append('date_of_entry', newMember.date_of_entry);
+    if (newMember.profile_picture) {
+      formData.append('profile_picture', newMember.profile_picture);
+    }
+    addMember(formData);
   };
+  
 
   if (!user) {
     return (
@@ -100,6 +133,7 @@ const Members = () => {
         <input type="text" name="sem" placeholder="Semester" value={newMember.sem} onChange={handleNewMemberChange} required />
         <input type="date" name="dob" placeholder="Date of Birth" value={newMember.dob} onChange={handleNewMemberChange} required />
         <input type="date" name="date_of_entry" placeholder="Date of Entry" value={newMember.date_of_entry} onChange={handleNewMemberChange} required />
+        <input type="file" name="profile_picture" onChange={handleNewMemberChange} />
         <button type="submit" className="button">Add Member</button>
       </form>
       <table className="editTable">
@@ -116,11 +150,9 @@ const Members = () => {
         <tbody>
           {members.map(member => (
             <tr key={member.mem_id}>
+              <td>{member.mem_id}</td>
               <td>
-                {member.mem_id}
-              </td>
-              <td>
-              <img src={`/${member.profile_picture}`} alt={member.mem_name} className="profile-picture" />
+                <img src={`/${member.profile_picture}`} alt={member.mem_name} className="profile-picture" />
               </td>
               <td>
                 {editMember && editMember.mem_id === member.mem_id ? (
@@ -145,7 +177,10 @@ const Members = () => {
               </td>
               <td>
                 {editMember && editMember.mem_id === member.mem_id ? (
-                  <button onClick={() => handleSave(member.mem_id)}>Save</button>
+                  <div>
+                    <button onClick={() => handleSave(member.mem_id)} className="button">Save</button>
+                    <button onClick={() => setEditMember(null)} className="button">Cancel</button>
+                  </div>
                 ) : (
                   <>
                     <button onClick={() => handleEdit(member)} className='button'>Edit</button>

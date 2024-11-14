@@ -24,7 +24,7 @@ const HomeAccount = () => {
     if (!user) { 
         return ( 
         <div className="container my-4"> 
-        <h2>Access Denied</h2> 
+        <h2 className='title'>Access Denied</h2> 
         <p>Please <Link to="/login">log in</Link> to view this page.</p> 
         </div> );
     }

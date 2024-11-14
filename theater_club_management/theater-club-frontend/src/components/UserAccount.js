@@ -8,17 +8,17 @@ import { UserContext } from '../context/UserContext';
 
 const UserAccount = () => {
     const { user } = useContext(UserContext);
-    const [members, setMembers] = useState([]);
+    // const [members, setMembers] = useState([]);
 
-    useEffect(() => {
-        axios.get('http://localhost:3001/api/members')
-            .then(response => {
-                setMembers(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error fetching the members!', error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     axios.get('http://localhost:3001/api/members')
+    //         .then(response => {
+    //             setMembers(response.data);
+    //         })
+    //         .catch(error => {
+    //             console.error('There was an error fetching the members!', error);
+    //         });
+    // }, []);
     // Redirect to login if user is not defined
     if (!user) { 
         return ( 
@@ -34,6 +34,7 @@ const UserAccount = () => {
             {/* <p>Account details here...</p> */}
             <table align='center'>
                 <tr> <Link to = "/members" className="button_big"> MEMBERS </Link> </tr>
+                {/* <tr className='title'> <h1>DOMAIN-WISE</h1></tr> */}
                <tr> <Link to = "/writers" className="button_big"> WRITERS </Link> </tr>
                <tr> <Link to = "/actor" className="button_big"> ACTORS </Link> </tr>
                <tr> <Link to = "/producers" className="button_big"> PRODUCERS </Link> </tr>
