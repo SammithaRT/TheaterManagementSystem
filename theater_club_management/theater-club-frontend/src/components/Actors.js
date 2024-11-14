@@ -9,6 +9,7 @@ const Actors = () => {
   const [editActor, setEditActor] = useState(null);
   const [newActor, setNewActor] = useState({ actor_id: '', expertise: '' });
   const { user } = useContext(UserContext);
+  
 
   useEffect(() => {
     const fetchActors = async () => {

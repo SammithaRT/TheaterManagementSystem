@@ -8,60 +8,63 @@ const fs = require('fs');
 
 const directory = 'public/profile_pictures/';
 
-
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/profile_pictures', express.static(path.join(__dirname, 'public/profile_pictures')));
 
 if (!fs.existsSync(directory)) {
-   fs.mkdirSync(
-    directory, { recursive: true }); 
+  try {
+    fs.mkdirSync(directory, { recursive: true });
+  } catch (err) {
+    console.error('Failed to create directory:', err);
   }
+}
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'public/profile_pictures/');
+    const absolutePath = path.join(__dirname, 'theater-club-frontend/public/profile_pictures/');
+    console.log('Absolute Path:', absolutePath); // Log to verify
+    cb(null, absolutePath);
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    const filename = file.fieldname + '-' + Date.now() + path.extname(file.originalname);
+    console.log('Generated filename:', filename);
+    cb(null, filename);
   }
 });
 
 const upload = multer({ storage: storage });
 
+
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    database: 'Theater_Club_Management'
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'Theater_Club_Management',
 });
-const port= 3001;
+const port = 3001;
 
 db.connect(err => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-        return;
-    }
-    console.log('Connected to the database.');
+  if (err) {
+    console.error('Error connecting to the database:', err);
+    return;
+  }
+  console.log('Connected to the database.');
 });
 
-
-// Middleware to parse JSON
 app.use(express.json());
 
-// Route to fetch all members
 app.get('/api/members', (req, res) => {
-    db.query('SELECT * FROM members', (error, results) => {
-        if (error) {
-            console.error('Database query error: ' + error);
-            res.status(500).send('Server error');
-            return;
-        }
-        res.send(results);
-    });
+  db.query('SELECT * FROM members', (error, results) => {
+    if (error) {
+      console.error('Database query error:', error);
+      res.status(500).send('Server error');
+      return;
+    }
+    res.send(results);
+  });
 });
-app.use(express.json());
 
 app.get('/api/members/:id', (req, res) => {
   const { id } = req.params;
@@ -200,7 +203,34 @@ app.post('/api/login', (req, res) => {
         });
 });
 
+app.post('/api/:eventId/book_event', (req, res) => {
+  try {
+    console.log('Received request to book event:', req.body);
+    const { eventId } = req.params;
+    const { user_id } = req.body;
+    console.log(`Booking event ID: ${eventId} for user ID: ${user_id}`);
 
+    const query2 = 'INSERT INTO student (srn,stu_name,dept,sem) VALUES (?,?,?,?)';
+    db.query(query2, [user_id, req.body.student_name, req.body.student_dept, req.body.student_sem], (error, results) => {
+      if (error) {
+        console.error('Error booking event:', error);
+        return res.status(500).send(error);
+      }
+      const query = 'INSERT INTO student_event (event_id , srn) VALUES (?, ?)';
+      db.query(query, [eventId, user_id], (error, results) => {
+        if (error) {
+          console.error('Error booking event:', error);
+          return res.status(500).send(error);
+        }
+        res.status(201).send({ id: results.insertId, event_id: eventId, user_id });
+      });
+    });
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    res.status(500).send('Server error');
+  }
+
+});
 // app.post('/api/members', (req, res) => {
 //   const { mem_id, mem_name, dept, sem, dob, date_of_entry} = req.body;
 //   const query = `INSERT INTO members (mem_id, mem_name, dept, sem, dob, date_of_entry) VALUES (?, ?, ?, ?, ?, ?)`;
@@ -215,6 +245,7 @@ app.post('/api/login', (req, res) => {
 app.post('/api/members', upload.single('profile_picture'), (req, res) => {
   const { mem_id, mem_name, dept, sem, dob, date_of_entry } = req.body;
   const profile_picture = req.file ? `profile_pictures/${req.file.filename}` : 'profile_pictures/default.png';
+  console.log('Uploaded file:', req.file); // Log file details
   const query = 'INSERT INTO members (mem_id, mem_name, dept, sem, dob, date_of_entry, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?)';
   db.query(query, [mem_id, mem_name, dept, sem, dob, date_of_entry, profile_picture], (err, results) => {
     if (err) {
@@ -225,6 +256,7 @@ app.post('/api/members', upload.single('profile_picture'), (req, res) => {
     }
   });
 });
+
 app.post('/api/actor', (req, res) => {
   const { actor_id, expertise } = req.body;
   const addActorQuery = 'INSERT INTO actor (actor_id, expertise) VALUES (?, ?)';
@@ -292,19 +324,19 @@ app.post('/api/plays', (req, res) => {
   });
 });
 
-app.post('/api/members', upload.single('profile_picture'), (req, res) => {
-  const { mem_id, mem_name, dept, sem, dob, date_of_entry } = req.body;
-  const profile_picture = req.file ? `profile_pictures/${req.file.filename}` : null;
-  const query = 'INSERT INTO members (mem_id, mem_name, dept, sem, dob, date_of_entry, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?)';
-  db.query(query, [mem_id, mem_name, dept, sem, dob, date_of_entry, profile_picture], (err, results) => {
-    if (err) {
-      console.error('Error adding member:', err);
-      res.status(500).json({ error: 'Error adding member.' });
-    } else {
-      res.json({ message: 'Member added successfully.', memberId: results.insertId });
-    }
-  });
-});
+// app.post('/api/members', upload.single('profile_picture'), (req, res) => {
+//   const { mem_id, mem_name, dept, sem, dob, date_of_entry } = req.body;
+//   const profile_picture = req.file ? `profile_pictures/${req.file.filename}` : null;
+//   const query = 'INSERT INTO members (mem_id, mem_name, dept, sem, dob, date_of_entry, profile_picture) VALUES (?, ?, ?, ?, ?, ?, ?)';
+//   db.query(query, [mem_id, mem_name, dept, sem, dob, date_of_entry, profile_picture], (err, results) => {
+//     if (err) {
+//       console.error('Error adding member:', err);
+//       res.status(500).json({ error: 'Error adding member.' });
+//     } else {
+//       res.json({ message: 'Member added successfully.', memberId: results.insertId });
+//     }
+//   });
+// });
 
 
 // Update a member's details
@@ -329,12 +361,12 @@ app.put('/api/members/:id', upload.single('profile_picture'), (req, res) => {
   const profile_picture = req.file ? `profile_pictures/${req.file.filename}` : req.body.profile_picture;
   const query = 'UPDATE members SET mem_name = ?, dept = ?, sem = ?, dob = ?, date_of_entry = ?, profile_picture = ? WHERE mem_id = ?';
   db.query(query, [mem_name, dept, sem, dob, date_of_entry, profile_picture, id], (err, results) => {
-      if (err) {
-          console.error('Error updating member:', err);
-          res.status(500).json({ error: 'Error updating member.' });
-      } else {
-          res.json({ message: 'Member updated successfully.' });
-      }
+    if (err) {
+      console.error('Error updating member:', err);
+      res.status(500).json({ error: 'Error updating member.' });
+    } else {
+      res.json({ message: 'Member updated successfully.' });
+    }
   });
 });
 

@@ -8,6 +8,8 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [showModal, setShowModal] = useState(false);
+
     const navigate = useNavigate();
     const { setUser } = useContext(UserContext);
 
@@ -31,10 +33,10 @@ const Login = () => {
     };
 
     return (
-        <div className="container my-4">
-            <h2 className='title'>Login</h2>
-            <form onSubmit={handleSubmit} className='form'>
-                <div className="form-group">
+        <div className="form" style={{ backgroundColor: '#f8f8f8' }}>
+            <h2 className='title'>CLUB HEAD LOGIN</h2>
+            <form onSubmit={handleSubmit}>
+                <div className="form">
                     <label>Username:  </label>
                     <input 
                         type="text" 
@@ -43,8 +45,6 @@ const Login = () => {
                         onChange={(e) => setUsername(e.target.value)} 
                     />
                     <p></p>
-                </div>
-                <div className="form-group">
                     <label>Password:  </label>
                     <input 
                         type="password" 
@@ -52,12 +52,12 @@ const Login = () => {
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)} 
                     />
-                </div>
                 <p></p>
                 <button type="submit" className="button">Login</button>
+                </div>
             </form>
             {message && <p className="mt-3">{message}</p>}
-            <Link to = "/" className="button_back" > Back </Link>
+            <Link to = "/" className="button" > Back </Link>
         </div>
     );
 };

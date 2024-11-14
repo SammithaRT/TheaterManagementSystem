@@ -7,10 +7,16 @@ const Plays = () => {
   const { eventId } = useParams();
   const [plays, setPlays] = useState([]);
   const [editPlay, setEditPlay] = useState(null);
-  const [newPlay, setNewPlay] = useState({ play_id: '', play_name: '', director_id: '', types: ''});
+  const [newPlay, setNewPlay] = useState({ play_id: '', play_name: '', director_id: '', types: '' });
+  const [showModal, setShowModal] = useState(false);
+  const [studentName, setStudentName] = useState('');
+  const [studentSrn, setStudentSrn] = useState('');
+  const [studentDept, setStudentDept] = useState('');
+  const [studentSem, setStudentSem] = useState('');
   const { user } = useContext(UserContext);
   const navigate = useNavigate();
 
+  // Fetch plays when the component mounts or when the eventId changes
   useEffect(() => {
     const fetchPlays = async () => {
       if (eventId) {
@@ -18,8 +24,8 @@ const Plays = () => {
           const response = await axios.get(`http://localhost:3001/api/${eventId}/plays`);
           setPlays(response.data);
         } catch (error) {
-          console.error("Error fetching plays:", error);
-          alert("An error occurred while fetching plays. Please try again later.");
+          console.error('Error fetching plays:', error);
+          alert('An error occurred while fetching plays. Please try again later.');
         }
       }
     };
@@ -27,6 +33,7 @@ const Plays = () => {
     fetchPlays();
   }, [eventId]);
 
+  // Handle edit play functionality
   const handleEdit = (play) => {
     setEditPlay({ ...play });
   };
@@ -37,7 +44,7 @@ const Plays = () => {
 
   const handleSave = async (id) => {
     try {
-      const response = await axios.put(`http://localhost:3001/api/plays/${id}`, editPlay);
+      await axios.put(`http://localhost:3001/api/plays/${id}`, editPlay);
       alert('Play updated successfully');
       setEditPlay(null);
       const updatedPlays = await axios.get(`http://localhost:3001/api/${eventId}/plays`);
@@ -67,9 +74,9 @@ const Plays = () => {
   const handleNewPlaySubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/plays', { ...newPlay, event_id: eventId });
+      await axios.post('http://localhost:3001/api/plays', { ...newPlay, event_id: eventId });
       alert('Play added successfully');
-      setNewPlay({ play_id: '', play_name: '', director_id: '', types: ''});
+      setNewPlay({ play_id: '', play_name: '', director_id: '', types: '' });
       const updatedPlays = await axios.get(`http://localhost:3001/api/${eventId}/plays`);
       setPlays(updatedPlays.data);
     } catch (error) {
@@ -78,6 +85,36 @@ const Plays = () => {
     }
   };
 
+  // Handle event booking functionality
+  const bookEvent = async (e) => {
+    e.preventDefault();
+    try {
+        const response = await axios.post(`http://localhost:3001/api/${eventId}/book_event`, {
+            user_id: studentSrn,
+            event_id: eventId,
+            student_name: studentName,
+            student_dept: studentDept,
+            student_sem: studentSem,
+        });
+
+        if (response.status === 200 || response.status === 201 || response.status === 202) {
+            alert('Event booked successfully!');
+        } else {
+            console.error('Failed to book event:', response);
+            alert('Failed to book the event. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error booking event:', error);
+        if (error.response) {
+            console.error('Response data:', error.response.data);
+            alert(`Error: ${error.response.data.message || 'An error occurred while booking the event.'}`);
+        } else {
+            alert('An error occurred while booking the event. Please try again.');
+        }
+    }
+};
+
+
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -85,6 +122,8 @@ const Plays = () => {
   return (
     <div className='container'>
       <h1 className='title'>PLAYS</h1>
+
+      {/* Admin can add a new play */}
       {user && (
         <form className="styled-form" onSubmit={handleNewPlaySubmit}>
           <input
@@ -122,6 +161,8 @@ const Plays = () => {
           <button type="submit" className="button">Add Play</button>
         </form>
       )}
+
+      {/* Display plays */}
       <ul className="plays-list">
         {plays.length > 0 ? (
           plays.map((play) => (
@@ -158,11 +199,9 @@ const Plays = () => {
                     {play.play_name}
                   </Link>
                   <div className="button">
-                    <p className="play-type">Type: {play.types}</p>
+                    <p className="play-type">    Type: {play.types}             </p>
                     {user && <p className="play-director">Director ID: {play.director_id}</p>}
-
                   </div>
-                  <p></p>
                   {user && (
                     <>
                       <button onClick={() => handleEdit(play)} className="button">Edit</button>
@@ -177,6 +216,67 @@ const Plays = () => {
           <p>No plays found for this event.</p>
         )}
       </ul>
+
+      {/* Book Event Modal */}
+      <div>
+        <button onClick={() => setShowModal(true)} className='button'>
+            Book Event
+        </button>
+        {showModal && (
+          <div className="form">
+            <div className="modal-content">
+              <span className="close" onClick={() => setShowModal(false)}>&times;</span>
+              <h2>Enter Student Details</h2>
+              <form onSubmit={bookEvent}>
+                <label>
+                  Name:
+                  <input
+                    type="text"
+                    value={studentName}
+                    onChange={(e) => setStudentName(e.target.value)}
+                    required
+                    className="input-field"
+                  />
+                </label>
+                <label>
+                  SRN:
+                  <input
+                    type="text"
+                    value={studentSrn}
+                    onChange={(e) => setStudentSrn(e.target.value)}
+                    required
+                    className="input-field"
+                  />
+                </label>
+                <label>
+                  Department:
+                  <input
+                    type="text"
+                    value={studentDept}
+                    onChange={(e) => setStudentDept(e.target.value)}
+                    required
+                    className="input-field"
+                  />
+                </label>
+                <label>
+                  Semester:
+                  <input
+                    type="text"
+                    value={studentSem}
+                    onChange={(e) => setStudentSem(e.target.value)}
+                    required
+                    className="input-field"
+                  />
+                </label>
+                <button type="submit" className="button">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+      </div>
+
       <button onClick={handleGoBack} className="button_back">Back</button>
     </div>
   );

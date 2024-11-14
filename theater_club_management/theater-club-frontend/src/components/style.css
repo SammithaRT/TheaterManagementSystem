@@ -38,7 +38,6 @@
     margin-top: 20%;
 }
 
-
 .button {
     color: rgba(25, 95, 25, 0.837);
     background-color:  rgba(248, 245, 245, 0.7);
@@ -57,6 +56,51 @@
     background-color: rgba(25, 95, 25, 0.837);
     color:#fafafa
 }
+
+/* General Button Styles */
+/*.button {
+    color: rgba(25, 95, 25, 0.837);             
+    background-color: rgba(248, 245, 245, 0.7); 
+    padding: 10px 20px;                        
+    text-decoration: none;                      
+    border-radius: 4px;                         
+    display: inline-block;                      
+    margin-top: 20px;     
+    top: 0; 
+    right: 0;                      
+    cursor: pointer;                          
+    font-size: 16px;                           
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease; 
+    margin: 10px;  
+    padding: 10px 20px;
+}
+
+button.button {
+    all: unset; 
+    display: inline-block; 
+    text-align: center; 
+    cursor: pointer; 
+    background-color: rgba(248, 245, 245, 0.7);
+    color: rgba(25, 95, 25, 0.837);      
+
+
+}
+
+.button:hover {
+    transform: scale(1.05);                
+    background-color: rgba(25, 95, 25, 0.837); 
+    color: #fafafa;                        
+}*/
+
+/* Additional styles for buttons inside forms or specific containers */
+button.button {
+    padding: 12px 24px; /* Padding for buttons to make them look better */
+    font-size: 16px;    /* Ensure proper font size for buttons */
+    border: none;       /* Remove any borders */
+    border-radius: 4px; /* Consistent border radius */
+}
+
 
 
 .button_back {
@@ -229,4 +273,101 @@
     border: 2px solid #ccc; /* Optional: Adds a border around the images */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow effect */
     margin-bottom: 10px; /* Optional: Adds space below the images */
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    width: 450px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the form elements */
+  }
+  
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  .input-field {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #4caf50;
+  }
+  
+  .button {
+    color: rgba(25, 95, 25, 0.837);
+    background-color: rgba(248, 245, 245, 0.7);
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 20px;
+    border: none;
+  }
+  
+  .button:hover {
+    transform: scale(1.05);
+    background-color: rgba(25, 95, 25, 0.837);
+    color: #fafafa;
+  }
+  
+  /* Style for the play type */
+.play-type {
+    font-size: 1.2em;                      /* Slightly larger font size for emphasis */
+    font-weight: bold;                     /* Make the text bold */
+    color: #4CAF50;                        /* Green color for the play type */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white background */
+    border-radius: 12px;                   /* Rounded corners for a clean look */
+    padding: 5px 10px;                     /* Add padding around the text */
+    text-transform: uppercase;             /* Make the text uppercase for emphasis */
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow to give depth */
+    margin: 0 10px;                        /* Margin for spacing */
+}
+
+/* Style for the play director */
+.play-director {
+    font-size: 1em;                        /* Standard font size */
+    font-style: italic;                    /* Italicize the director's name for style */
+    color: #6B8E23;                        /* Olive green color for the director */
+    padding: 5px 10px;                     /* Add padding around the text */
+    border-radius: 8px;                    /* Rounded corners for soft appearance */
+    background-color: rgba(240, 248, 255, 0.7); /* Light blue background */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15); /* Soft shadow for a floating effect */
+    margin: 0 10px;                        /* Margin for spacing */
+}
+
+/* Optionally, you can add some hover effects */
+.play-type:hover,
+.play-director:hover {
+    transform: scale(1.05);                /* Slightly enlarge the element on hover */
+    transition: transform 0.3s ease;        /* Smooth transition for hover effect */
 }

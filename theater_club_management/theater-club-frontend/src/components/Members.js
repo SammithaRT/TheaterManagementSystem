@@ -98,7 +98,7 @@ const Members = () => {
   };
   
   const handleNewMemberSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent form from reloading the page
     const formData = new FormData();
     formData.append('mem_id', newMember.mem_id);
     formData.append('mem_name', newMember.mem_name);
@@ -112,12 +112,13 @@ const Members = () => {
     addMember(formData);
   };
   
+  
 
   if (!user) {
     return (
       <div className="container">
         <h2>Access Denied</h2>
-        <p>Please <Link to="/login">log in</Link> to view this page.</p>
+        <p>Please <Link to="/login" className='button'>log in</Link> to view this page.</p>
       </div>
     );
   }
@@ -127,15 +128,19 @@ const Members = () => {
       <Link to="/account" state={{ user }} className="button_back">Back</Link>
       <h1 className='title'>MEMBERS</h1>
       <form onSubmit={handleNewMemberSubmit} className="addMemberForm">
-        <input type="text" name="mem_id" placeholder="Member ID" value={newMember.mem_id} onChange={handleNewMemberChange} required />
-        <input type="text" name="mem_name" placeholder="Member Name" value={newMember.mem_name} onChange={handleNewMemberChange} required />
-        <input type="text" name="dept" placeholder="Department" value={newMember.dept} onChange={handleNewMemberChange} required />
-        <input type="text" name="sem" placeholder="Semester" value={newMember.sem} onChange={handleNewMemberChange} required />
-        <input type="date" name="dob" placeholder="Date of Birth" value={newMember.dob} onChange={handleNewMemberChange} required />
-        <input type="date" name="date_of_entry" placeholder="Date of Entry" value={newMember.date_of_entry} onChange={handleNewMemberChange} required />
-        <input type="file" name="profile_picture" onChange={handleNewMemberChange} />
-        <button type="submit" className="button">Add Member</button>
-      </form>
+      <input type="text" name="mem_id" placeholder="Member ID" value={newMember.mem_id} onChange={handleNewMemberChange} required />
+      <input type="text" name="mem_name" placeholder="Member Name" value={newMember.mem_name} onChange={handleNewMemberChange} required />
+      <input type="text" name="dept" placeholder="Department" value={newMember.dept} onChange={handleNewMemberChange} required />
+      <input type="text" name="sem" placeholder="Semester" value={newMember.sem} onChange={handleNewMemberChange} required />
+      <input type="date" name="dob" placeholder="Date of Birth" value={newMember.dob} onChange={handleNewMemberChange} required />
+      <input type="date" name="date_of_entry" placeholder="Date of Entry" value={newMember.date_of_entry} onChange={handleNewMemberChange} required />
+      
+      <label htmlFor="profile_picture">Profile Picture:</label>
+      <input type="file" name="profile_picture" id="profile_picture" onChange={handleNewMemberChange} />
+      
+      <button type="submit" className="button">Add Member</button>
+    </form>
+
       <table className="editTable">
         <thead>
           <tr>
