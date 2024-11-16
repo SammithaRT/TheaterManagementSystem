@@ -40,7 +40,7 @@ const upload = multer({ storage: storage });
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'password',
+  password: 'cmysql',
   database: 'Theater_Club_Management',
 });
 const port = 3001;
@@ -299,15 +299,15 @@ app.post('/api/producer', (req, res) => {
 
 
 app.post('/api/events', (req, res) => {
-  const { event_id, event_name, types, org_team } = req.body;
-  const addEventQuery = 'INSERT INTO event (event_id, event_name, types, org_team) VALUES (?, ?, ?, ?)';
+  const { event_id, event_name, types, org_team, total_seats } = req.body;
+  const addEventQuery = 'INSERT INTO event (event_id, event_name, types, org_team, total_seats) VALUES (?, ?, ?, ?, ?)';
 
-  db.query(addEventQuery, [event_id, event_name, types, org_team], (err, results) => {
+  db.query(addEventQuery, [event_id, event_name, types, org_team, total_seats], (err, results) => {
     if (err) {
       console.error('Error adding producers:', err);
       return res.status(500).json({ message: 'An error occurred while adding', error: err.message });
     }
-    return res.status(201).json({ message: 'Added successfully', writer: { event_id, event_name, types, org_team } });
+    return res.status(201).json({ message: 'Added successfully', writer: { event_id, event_name, types, org_team, total_seats } });
   });
 })
 
@@ -425,10 +425,10 @@ app.put('/api/producer/:id', (req, res) => {
 
 app.put('/api/events/:id', (req, res) => {
   const { id } = req.params;
-  const {event_name, types, org_team} = req.body;
-  const updateEventQuery = 'UPDATE event SET event_name = ?, types = ?, org_team = ? WHERE event_id = ?';
+  const {event_name, types, org_team, total_seats} = req.body;
+  const updateEventQuery = 'UPDATE event SET event_name = ?, types = ?, org_team = ?, total_seats = ? WHERE event_id = ?';
 
-  db.query(updateEventQuery, [event_name, types, org_team, id], (err, results) => {
+  db.query(updateEventQuery, [event_name, types, org_team, total_seats, id], (err, results) => {
     if (err) {
       console.error('Error updating actor:', err);
       return res.status(500).json({ message: 'An error occurred while updating', error: err.message });
@@ -436,7 +436,7 @@ app.put('/api/events/:id', (req, res) => {
     if (results.affectedRows === 0) {
       return res.status(404).json({ message: 'Not found' });
     }
-    return res.status(200).json({ message: 'Updated successfully', event: { event_id: id, event_name, types, org_team } });
+    return res.status(200).json({ message: 'Updated successfully', event: { event_id: id, event_name, types, org_team, total_seats } });
   });
 });
 

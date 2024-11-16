@@ -7,7 +7,7 @@ import { UserContext } from '../context/UserContext';
 const Events = () => {
     const [events, setEvents] = useState([]);
     const [editEvent, setEditEvent] = useState(null);
-    const [newEvent, setNewEvent] = useState({ event_id: '', event_name: '', types: '', org_team:''});
+    const [newEvent, setNewEvent] = useState({ event_id: '', event_name: '', types: '', org_team:'', total_seats:''});
     const { user } = useContext(UserContext);
 
     useEffect(() => {
@@ -69,7 +69,7 @@ const Events = () => {
             const response = await axios.post('http://localhost:3001/api/events', newEvent);
             console.log('Event added:', response.data);
             alert('Event added successfully');
-            setNewEvent({ event_id: '', event_name: '', types: '', org_team:'' });
+            setNewEvent({ event_id: '', event_name: '', types: '', org_team:'', total_seats:'' });
             const updatedEvents = await axios.get('http://localhost:3001/api/event');
             const sortedEvents = updatedEvents.data.sort((a, b) => b.event_id - a.event_id);
             setEvents(sortedEvents);
@@ -87,6 +87,7 @@ const Events = () => {
                 <input type="text" name="event_name" placeholder="Event Name" value={newEvent.event_name} onChange={handleNewEventChange} required />
                 <input type="text" name="types" placeholder="Type" value={newEvent.types} onChange={handleNewEventChange} required />
                 <input type="text" name="org_team" placeholder="Organization Team" value={newEvent.org_team} onChange={handleNewEventChange} required />
+                <input type="text" name="total_seats" placeholder="Total Number of Seats" value={newEvent.total_seats} onChange={handleNewEventChange} required />
                 <button type="submit" className="button">Add Event</button>
             </form>}
             <ul>
@@ -97,6 +98,7 @@ const Events = () => {
                                 <input type="text" name="event_name" value={editEvent.event_name} onChange={handleEditEventChange} />
                                 <input type="text" name="types" value={editEvent.types} onChange={handleEditEventChange} />
                                 <input type="text" name="org_team" value={editEvent.org_team} onChange={handleEditEventChange} />
+                                <input type="text" name="total_seats" value={editEvent.total_seats} onChange={handleEditEventChange} />
                                 <button onClick={() => handleSave(item.event_id)} className="button">Save</button>
                                 <button onClick={() => setEditEvent(null)} className="button">Cancel</button>
 
@@ -109,6 +111,7 @@ const Events = () => {
                                {user && <div className='button'>
                                 <p>Type: {item.types}</p>
                                 <p>Organization Team ID: {item.org_team}</p>
+                                <p>Total Number of Seats: {item.total_seats}</p>
                                 </div>}
                                 <p></p>
                                 {user && <button onClick={() => handleEdit(item)} className="button">Edit</button>}
