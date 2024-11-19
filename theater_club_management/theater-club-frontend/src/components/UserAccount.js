@@ -38,6 +38,8 @@ const UserAccount = () => {
                <tr> <Link to = "/writers" className="button_big"> WRITERS </Link> </tr>
                <tr> <Link to = "/actor" className="button_big"> ACTORS </Link> </tr>
                <tr> <Link to = "/producers" className="button_big"> PRODUCERS </Link> </tr>
+               <tr> <Link to = "/venue" className="button_big"> VENUES </Link> </tr>
+
             </table>
             <p><Link to="/" type = "button" className="go_to_account"> Home </Link></p>
 

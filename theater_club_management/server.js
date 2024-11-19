@@ -40,7 +40,7 @@ const upload = multer({ storage: storage });
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'cmysql',
+  password: 'password',
   database: 'Theater_Club_Management',
 });
 const port = 3001;

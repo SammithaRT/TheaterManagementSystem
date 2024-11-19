@@ -114,6 +114,8 @@ const Events = () => {
                                 <p>Total Number of Seats: {item.total_seats}</p>
                                 </div>}
                                 <p></p>
+                                <p className='button'>Seats left: {item.seats}</p>
+                                <p></p>
                                 {user && <button onClick={() => handleEdit(item)} className="button">Edit</button>}
                                 {user && <button onClick={() => handleDelete(item.event_id)} className="button">Delete</button>}
                             </div>
