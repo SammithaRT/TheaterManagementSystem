@@ -223,7 +223,7 @@ const Plays = () => {
             Book Event
         </button>
         {showModal && (
-          <div className="form">
+          <div className="modal">
             <div className="modal-content">
               <span className="close" onClick={() => setShowModal(false)}>&times;</span>
               <h2>Enter Student Details</h2>
